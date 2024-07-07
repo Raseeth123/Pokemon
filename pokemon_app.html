@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(68, 63, 63);
+        }
+
+        .cot{
+            margin: auto;
+            width: 350px;
+            height: 300px;
+            margin-top:150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: -70px;
+        }
+
+
+        .cot1{
+            background-color: rgb(203, 190, 190);
+            display: inline-block;
+            height: 40px;
+            width: 350px;
+            border-radius: 100px;
+        }
+
+        .ipt{
+            border:none;
+            width: 180px;
+            height: 20px;
+            border-radius: 8px;
+            background: transparent;
+            outline: none;
+            margin-left: 20px;
+            font-size: 18px;
+        }
+
+        .ipt:active{
+            border: none;
+            outline: none;
+        }
+
+        .btn{
+            border:none;
+            height: 40px;
+            border-radius: 100px;
+            background-color: chocolate;
+            color: white;
+            font-weight: bold;
+            margin-left: 48px;
+        }
+
+        img{
+            margin-left: auto;
+            margin-right: auto;
+            width: 200px;
+            height: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="cot">
+        <div class="cot1"><input type="text" class="ipt" id="ipt"><button class="btn" id="btn">Get Pokemon</button></div>
+        <br>
+     </div>
+    <img src="" id="pokemonsprite" style="display: none;"></img>
+    <script>
+        fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
+        let useript=document.getElementById("ipt")
+        let btnipt=document.getElementById("btn")
+
+        async function loaddata(value){
+        try{
+            let response=await fetch(`https://pokeapi.co/api/v2/pokemon/${value}`)
+            if(!response.ok){
+                throw new Error("Could not Load!!")
+            }
+            response=await response.json()
+            let pokemonsprite=response.sprites.front_default
+            let imgelm=document.getElementById("pokemonsprite")
+            imgelm.src=pokemonsprite
+            imgelm.style.display="block"
+        }
+        catch(error){
+            console.log(error)
+        }
+        }
+
+        btnipt.onclick=function(){
+            loaddata(useript.value.toLowerCase())
+        }
+    </script>
+</body>
+</html>
+
+
+
